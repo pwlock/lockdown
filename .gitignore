@@ -1,0 +1,6 @@
+.cache/
+build/
+a.out
+test.c
+compile_commands.json
+
