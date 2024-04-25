@@ -24,34 +24,46 @@ extern FILE* stdout;
 extern FILE* stdin;
 extern FILE* stderr;
 
-extern FILE*
-fopen(const char* __restrict _name, const char* __restrict _mode);
+__WC_EXTERN_C_BEGIN
 
-extern void
-fclose(FILE* _stream);
+/* Open handle for file located at name. */
+extern FILE* fopen(const char* __restrict _name, 
+                   const char* __restrict _mode);
 
-extern int
-ungetc(int _c, FILE* _stream);
+/* Close handle stream. */
+extern void fclose(FILE* _stream);
 
-extern int
-fgetc(FILE* _stream);
+/* Push character onto stream's internal buffer */
+extern int ungetc(int _c, FILE* _stream);
 
-extern size_t
-fread(void* __restrict _buffer, size_t _size, size_t _memberSize, FILE* _f);
+/* Extract character from stream's internal buffer */
+extern int fgetc(FILE* _stream);
 
-extern int
-fseek(FILE* _stream, long int _off, int _base);
+/* Read size elements from stream. */
+extern size_t fread(void* __restrict _buffer, 
+                    size_t _size, 
+                    size_t _memberSize, 
+                    FILE* _f);
 
-extern long int
-ftell(FILE* _stream);
+/* Jump to offset relative to stream's base. */
+extern int fseek(FILE* _stream, 
+                 long int _off, 
+                 int _base);
 
-extern void
-clearerr(FILE* _stream);
+/* Get current file position */
+extern long int ftell(FILE* _stream);
 
-extern int 
-feof(FILE* _stream);
+/* Remove error status from handle */
+extern void clearerr(FILE* _stream);
 
-extern int
-ferror(FILE* _stream);
+/* Is there chars left to be read? */
+extern int feof(FILE* _stream);
+
+/* Did something went wrong during read/write? */
+extern int ferror(FILE* _stream);
+
+extern int printf(const char* _message, ...);
+
+__WC_EXTERN_C_END
 
 #endif

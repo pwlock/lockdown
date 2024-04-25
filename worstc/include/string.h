@@ -12,6 +12,8 @@
 #define __need_NULL
 #include <stddef.h>
 
+__WC_EXTERN_C_BEGIN
+
 /* Copy _size bytes from _src to _dest */
 extern void*
 memcpy(void* __restrict _dest, const void* _src, size_t _size);
@@ -75,5 +77,7 @@ extern char*
 strtok_r(char* __restrict _string, const char* __restrict _sep, char** _ctx);
 
 #endif
+
+__WC_EXTERN_C_END
 
 #endif

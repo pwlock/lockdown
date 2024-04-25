@@ -6,13 +6,15 @@ WORSTC_OUTPUT=$(WORSTC_BUILD_DIR)/libworstc.so
 
 # ============================ FILES
 WORSTC_MALLOC_FILES=malloc/liballoc_interface.c malloc/liballoc.c
+WORSTC_MATH_FILES=math/acos.c math/fpclassify.c math/sqrt.c math/abs.c math/log.c
 WORSTC_STDLIB_FILES=stdlib/strtoul.c
 WORSTC_STDIO_FILES=stdio/fopen.c stdio/getc.c stdio/fread.c stdio/stdout.c \
-				   stdio/feof.c stdio/fseek.c
+				   stdio/feof.c stdio/fseek.c stdio/printf.c
 WORSTC_STRING_FILES=string/strcpy.c string/memset.c string/strlen.c string/memcmp.c \
 					string/memchr.c string/strspn.c string/memmove.c string/strtok.c
+WORSTC_STRINGS_FILES=strings/ffs.c
 WORSTC_FILES=start.c $(WORSTC_STRING_FILES) $(WORSTC_MALLOC_FILES) $(WORSTC_STDIO_FILES) \
-					 $(WORSTC_STDLIB_FILES)
+					 $(WORSTC_STDLIB_FILES) $(WORSTC_MATH_FILES) $(WORSTC_STRINGS_FILES)
 # =============================
 
 WORSTC_SOURCES=$(addprefix $(WORSTC_SOURCE_DIR)/,$(WORSTC_FILES))

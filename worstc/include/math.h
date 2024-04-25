@@ -1,5 +1,5 @@
 /* math.h
-   Purpose: Mathematical functions. */
+   Purpose: Mathematics. */
 #pragma once
 
 #include "bits/config.h"
@@ -20,10 +20,26 @@ extern int __fpclassifyf64(double _f);
 #define fpclassify(X) \
     sizeof(X) == sizeof(float) ? __fpclassifyf32(X) : __fpclassifyf64(X)
 
-#define isfinite(X) (fpclassify(X) & ~(FP_NAN | FP_INFINITE))
-#define isnormal(X) (fpclassify(X) == FP_NORMAL)
+#define isfinite(X)    (fpclassify(X) & ~(FP_NAN | FP_INFINITE))
+#define isnormal(X)    (fpclassify(X) == FP_NORMAL)
 #define isnan(X)       (fpclassify(X) == FP_NAN)
 #define isinf(X)       (fpclassify(X) == FP_INFINITE)
+
+#if defined(_HAS_C99)
+
+#define HUGE_VAL ((double)1e120000)
+#define HUGE_VALF 1e12000f
+#define HUGE_VALL HUGE_VAL
+
+#if __WC_GNU_VERSION >= 303
+#define NAN __builtin_nanf("")
+#define INFINITY __builtin_inff()
+#else
+#define NAN (0.0f / 0.0f)
+#define INFINITY HUGE_VALF
+#endif
+
+#endif
 
 inline int __extract_signbit_32(float _x)
 {
@@ -53,6 +69,34 @@ inline int __extract_signbit_64(double _x)
     : __extract_signbit_64(X)
 #endif /* __has_builtin(__builtin_signbit) */
 
+__WC_EXTERN_C_BEGIN
 
+
+/* Formula-based functions
+   acos - Compute the arc cosine of X. */
+extern double acos(double _x);
+extern float acosf(float _x);
+extern long double acosl(long double _x);
+
+/* asin - Compute the arc sine of X. */
+extern double asin(double _x);
+extern float asinf(float _x);
+extern long double asinl(long double _x);
+
+/* fabs - Compute the absolute value of X. */
+extern double fabs(double _x);
+extern float fabsf(float _x);
+extern long double fabsl(long double _x);
+
+/* sqrt - Compute the square root of X. */
+extern float sqrtf(float _x);
+extern double sqrt(double _x);
+extern long double sqrtl(long double _x);
+
+/* log - Compute the natural logarithm of X.  */
+extern float logf(float _x);
+extern double log(double _x);
+
+__WC_EXTERN_C_END
 
 #endif
